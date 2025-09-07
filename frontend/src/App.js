@@ -56,9 +56,9 @@ function App() {
                 size="large"
                 shape="pill"
                 text="signin_with"
-                width="300"
+                width="500"
               />
-              <p className="note">🔒 Secure Google Sign-In. Your data is safe.</p>
+              <p className="note">Secure Google Sign-In. Your data is safe.</p>
             </>
           ) : (
             <>
@@ -66,7 +66,7 @@ function App() {
                 <span>Hello {user.name}</span>
                 <span className="status-dot"></span>
               </h2>
-              <p className="small-text">You are logged in with Google ✨</p>
+              <p className="small-text">You are logged in with Google</p>
 
               <div className="button-group">
                 <button
@@ -92,7 +92,7 @@ function App() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
                   >
-                    <span className="material-icons">article</span>
+                    <span className="material-icons"> </span>
                     <span>{item}</span>
                   </motion.li>
                 ))}
