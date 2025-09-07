@@ -59,7 +59,7 @@ function App() {
           ) : (
             <>
               <h2 className="text-xl font-semibold text-gray-700 mb-2">
-                Hello, {user.name}
+                Hello {user.name}
               </h2>
               <p className="text-sm text-gray-500 mb-6">
                 You are logged in with Google
