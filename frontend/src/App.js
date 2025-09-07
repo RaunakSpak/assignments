@@ -4,22 +4,37 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 import { motion } from "framer-motion";
 import "./App.css";
 
+// =====================
+// Main App Component
+// =====================
 function App() {
-  const [user, setUser] = useState(null);
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // =====================
+  // State Management
+  // =====================
+  const [user, setUser] = useState(null);      // Stores Google user info after login
+  const [data, setData] = useState([]);        // Stores fetched headlines
+  const [loading, setLoading] = useState(false); // Loading state for fetch
 
+  // =====================
+  // Google Login Handlers
+  // =====================
+
+  // Called on successful Google login
   const handleLoginSuccess = (credentialResponse) => {
     console.log("Login Success:", credentialResponse);
     setUser(credentialResponse);
   };
 
+  // Logout handler
   const handleLogout = () => {
     googleLogout();
     setUser(null);
     setData([]);
   };
 
+  // =====================
+  // Fetch Headlines from Backend
+  // =====================
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -33,6 +48,9 @@ function App() {
     }
   };
 
+  // =====================
+  // Render UI
+  // =====================
   return (
     <GoogleOAuthProvider clientId="552492918552-jh96p4c7hspe419ok8025rug48m8q67g.apps.googleusercontent.com">
       <div className="container">
@@ -42,8 +60,9 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* <div className="top-bar"></div> */}
-
+          {/* =====================
+              Login Section
+              ===================== */}
           {!user ? (
             <>
               <h1 className="title">
@@ -62,12 +81,16 @@ function App() {
             </>
           ) : (
             <>
+              {/* =====================
+                  Logged-in Section
+                  ===================== */}
               <h2 className="subtitle">
                 <span>Hello {user.name}</span>
                 <span className="status-dot"></span>
               </h2>
               <p className="small-text">You are logged in with Google</p>
 
+              {/* Buttons for fetching data and logout */}
               <div className="button-group">
                 <button
                   onClick={fetchData}
@@ -81,8 +104,12 @@ function App() {
                 </button>
               </div>
 
+              {/* Loading indicator */}
               {loading && <p className="loading">Loading headlines...</p>}
 
+              {/* =====================
+                  Headlines List Section
+                  ===================== */}
               <ul className="headline-list">
                 {data.map((item, index) => (
                   <motion.li
@@ -101,9 +128,6 @@ function App() {
           )}
         </motion.div>
       </div>
-
-
-
     </GoogleOAuthProvider>
   );
 }
